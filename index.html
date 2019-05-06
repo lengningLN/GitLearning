@@ -38,11 +38,30 @@
                         查看配置
                         <p>git config --list --local/global/system</p>
                     </li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
+                    <li>
+                        基本操作
+                        <p>git status : 查看工作区、暂存区的状态</p>
+                        <p>git add 文件名: 将工作区新建/修改的内容添加到暂存区</p>
+                        <p>git commit -m "commit message" 文件名: 将暂存区的内容提交到本地库</p>
+                    </li>
+                    <li>
+                        查看历史
+                    </li>
+                    <li>
+                        分支操作
+                    </li>
+                    <li>
+                        比较文件差异
+                        <p>git diff [文件名] : 将工作区中的文件和暂存区的进行比较</p>
+                        <p>git diff [本地库历史版本] [文件名] : 将工作区的文件和本地库历史记录比较，不带文件名的话，会比较多个文件</p>
+                    </li>
+                    <li>
+                        解决冲突
+                        <p>1. 编辑文件，删除特殊符号，删除重复内容或者保留内容</p>
+                        <p>2. 将文件修改完毕后，保存退出。</p>
+                        <p>3. git add [文件名]</p>
+                        <p>4. git commit -m"日志信息" (注意此时commit时不能带文件名)</p>
+                    </li>
                     <li></li>
                     <li></li>
                     <li></li>
