@@ -14,13 +14,11 @@
         <div class="accordion"><h1>Terminologys (术语)</h1></div>
             <div class="panel">
                 <ol>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
+                    <li>git的三大类型对象
+                        <p>commit : 每次提交对象</p>
+                        <p>tree : 文件夹</p>
+                        <p>blob : 指具体的某个文件,blob和文件名没有关系，只要文件内容相同，就是同一个blob</p>
+                    </li>
                     <li></li>
                     <li></li>
                     <li></li>
@@ -29,6 +27,22 @@
         <div class="accordion"><h1>Basic Commands (常用命令)</h1></div>
             <div class="panel">
                 <ol>
+                    <li>
+                        常用的Linux命名
+                        <p>1. 创建文件夹：mkdir 文件夹名称</p>
+                        <p>2. 新建一个文件并写入一段话：echo '文件内容' > 文件名</p>
+                        <p>3. 移动文件：mv 原地址/文件名 新地址/文件名</p>
+                        <p>4. 查看当前目录：pwd</p>
+                        <p>5. 查看当前路径下的所有文件的详细信息，包括隐藏文件：ls -al</p>
+                    </li>
+                    <li>
+                        探索.git目录
+                        <p>HEAD : 指向当前分支的引用</p>
+                        <p>config : git仓库的配置文件，以及local的用户信息存放在这里；</p>
+                        <p>refs : 引用，里面存放tags(里程碑)和heads(分支)</p>
+                        <p>objects : 存放所有的git对象</p>
+                        <p></p>
+                    </li>
                     <li>
                         添加配置
                         <p> git config --local/global/system user.name 'Your name' </p>
@@ -43,6 +57,11 @@
                         <p>git status : 查看工作区、暂存区的状态</p>
                         <p>git add 文件名: 将工作区新建/修改的内容添加到暂存区</p>
                         <p>git commit -m "commit message" 文件名: 将暂存区的内容提交到本地库</p>
+                        <p>git branch newBranchName : 创建新分支</p>
+                        <p>git checkout newBranchName : 切换到新分支</p>
+                        <p>git merge newBranchName : 将newBranchName合并到当前分支</p>
+                        <p>git branch -d newBranchName :  删除newBranchName分支</p>
+                        <p>git status : 查看当前文件的状态，如果合并出现冲突，使用此命令可以显示冲突的文件</p>
                     </li>
                     <li>
                         查看历史
@@ -52,6 +71,12 @@
                         <p>git log --oneline -n3 : 查看最近三条的简介历史</p>
                         <p>git log --oneline --all -n3 --graph : 查看所有分支最近4条单行的图形化历史(log 之后的命令没有先后顺序，可任意排序)</p>
                     </li>
+                     <li>
+                         查看对象内容 git cat-file : 显示版本库对象的内容、类型以及大小信息
+                         <p>-p : 根据对象的类型，以优雅的方式显示对象的内容</p>
+                         <p>-t : 显示对象的类型</p>
+                         <p>-s : 显示对象的大小</p>
+                     </li>
                     <li>
                         分支操作
                     </li>
@@ -59,6 +84,10 @@
                         比较文件差异
                         <p>git diff [文件名] : 将工作区中的文件和暂存区的进行比较</p>
                         <p>git diff [本地库历史版本] [文件名] : 将工作区的文件和本地库历史记录比较，不带文件名的话，会比较多个文件</p>
+                        <p>git diff 一个commit的hash版本号  另一个commit的hash版本号 ： 比较两个版本的不同之处</p>
+                        <p>git diff HEAD HEAD~1 (或者git diff HEAD HEAD^ ) : 比较最近两个版本的异同</p>
+                        <p>^和~都是父节点，区别是跟数字的时候，^2是第二个父节点，~2是父节点的父节点。^和~可以组合使用，比如：HEAD~2^2 标示的是当前节点的父节点的父节点的第二个父节点</p>
+                        
                     </li>
                     <li>
                         解决冲突
