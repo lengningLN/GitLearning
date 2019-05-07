@@ -10,3 +10,56 @@
 
 ## 修改任意的commit的message
 	- git log -n ：查看最近n次的commit
+	- git rebase -i 父commit的哈希值
+
+## 合并多个commit为一个commit
+	- git rebase -i 要合并的最早的commit的父commit的哈希值
+
+## 暂存区和HEAD的比较
+	- 在commit之前可以对比这次更改的内容，做一次检查，如果有不对的地方，还可以改，改完之后，再commit
+	- git diff --cached
+
+## 工作区和暂存区的比较
+	- git diff : 默认比较所有文件的差异
+	- git diff -- 文件一 文件二 : 只对比文件一、文件二在工作区和暂存区的区别
+	- -- 标识后面要加文件
+
+## 忽略暂存区(让暂存区所有的变更都恢复成和HEAD一致)
+	- git reset HEAD  ： 忽略所有的
+	- git reset HEAD 文件一 文件二  ： 忽略指定的文件
+
+## 工作区恢复到暂存区（-- 后面跟文件）
+	- git checkout -- 文件 
+
+## 消除最近的几次提交 （代码回滚到指定的commit）
+	- git reset --hard commit_id
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
