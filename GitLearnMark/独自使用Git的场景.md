@@ -35,6 +35,9 @@
 	- git reset --hard commit_id
 
 
+## 真确删除文件
+	
+
 
 
 
