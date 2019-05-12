@@ -5,6 +5,7 @@
 	3. pwd ： 查看当前目录的路径
 	4. ls -al ： 查看当前路径下所有文件（包括隐藏文件）的详细信息
 	5. echo '文件内容' > 文件名 ：将文件内容写入文件，如果文件不存在则创建一个新文件
+	6. 产看git某个命令的详细介绍：git 命令 -h （比如：git merge -h）
 
 ## 配置git的用户信息
 	- git config --local/global/system user.name 'liuning'
@@ -12,6 +13,16 @@
 
 	- git config --unset --local/global/system user.name //清除用户名
 	- git config --list --local/global/system //查看配置信息
+
+## 创建Git仓库
+	1. 用Git之前已经有项目代码
+		$ cd 项目代码所在文件夹
+		$ git init
+	2. 用Git之前没有项目代码
+		$ cd 某个文件夹
+		$ git init yout_project_name #会在当前路径下创建和项目名称同名的文件夹
+		$ cd your_project
+
 
 ## 基本操作
 	- git status ： 查看工作区、暂存区的状态，包括合并分支时或者合并代码时出现冲突，显示冲突文件

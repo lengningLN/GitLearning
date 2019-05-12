@@ -31,13 +31,24 @@
 ## 工作区恢复到暂存区（-- 后面跟文件）
 	- git checkout -- 文件 
 
-## 消除最近的几次提交 （代码回滚到指定的commit）
+## 消除最近的几次提交 （代码回滚到指定的commit,）
 	- git reset --hard commit_id
+	- git reset --hard HEAD : 忽略工作区和暂存区，恢复到和最近的commit一致
 
+## 正确删除文件
+	- git rm 文件
 
-## 真确删除文件
-	
+## 处理临时加塞的紧急任务
+	- git stash : 保存临时的变更
+	- 执行完紧急的操作之后
+	- git stash list : 查看临时存放的列表
+	- git stash apply : 恢复到临时变更的内容,保留临时变更的记录在list中
+	- git stash pop : 恢复到临时变更的内容，顺便从list删除这个临时变更的记录
 
+## 指定不需要Git管理的文件
+	- 创建 .gitigore文件，在里面写入文件名或者文件夹
+	- abc ：忽略abc文件
+	- abc/ ： 忽略abc文件夹下的所有文件
 
 
 
