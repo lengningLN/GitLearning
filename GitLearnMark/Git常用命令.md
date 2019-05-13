@@ -60,7 +60,17 @@
 	- git commit -m"日志信息" (注意此时commit时不能带文件名)
 
 
+## git remote 命令 (处理本地和远端的桥梁)
+	- git remote -h : 查看所有支持的remote的子命令
+	- git remote -v : 显示所有远端仓库（-v的意思是列出详细信息）
+	- git remote add [shortname] [url] : 添加一个新的远程仓库
+	- git fetch [shortname] [分支名]: 从远程仓库进行拉取操作
+	- git pull [shortname] [分支名] --allow-unrelated-histories: 是git fetch 和 git merge 的组合体，（--allow-unrelated-histories该选项可以合并两个独立启动仓库的历史）。
+	- git push [shortname]  [分支名]: 向远程仓库进行push操作
+	
 
+
+## 
 
 
 
