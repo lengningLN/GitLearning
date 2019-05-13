@@ -60,26 +60,27 @@
 	- git commit -m"日志信息" (注意此时commit时不能带文件名)
 
 
-## git remote 命令 (处理本地和远端的桥梁)
+## git remote 命令 (处理本地和远端的桥梁，[shortname]是指远程仓库的别名)
 	- git remote -h : 查看所有支持的remote的子命令
 	- git remote -v : 显示所有远端仓库（-v的意思是列出详细信息）
-	- git remote add [shortname] [url] : 添加一个新的远程仓库
+	- git remote add [shortname] [url] : 添加一个新的远程仓库url，并起了一个别名shortname
 	- git fetch [shortname] [分支名]: 从远程仓库进行拉取操作
 	- git pull [shortname] [分支名] --allow-unrelated-histories: 是git fetch 和 git merge 的组合体，（--allow-unrelated-histories该选项可以合并两个独立启动仓库的历史）。
 	- git push [shortname]  [分支名]: 向远程仓库进行push操作
 	
 
 
-## git多人在同一分支协作
+## git多人在同一分支协作（[shortname]是远程仓库的别名）
 	- 如果多人在不同的文件中操作，是不会出现冲突的。只要遵循push之前先pull的早做就没有问题。
 	- pull的命令可以分解成fetch 和 merge 两个命令
-		- git fetch [本地仓库shortname] [远程分支名] : 将远程分支下的最新文件下载到当前分支中
+		- git fetch [远程仓库shortname] [远程分支名] : 将远程分支下的最新文件下载到当前分支中
 		- git log -p master [shortname/远程分支名] : 比较本地master分支和shortname/远程分支名的差别
 		- git merge [分支名] : 合并分支
 
 	- 在github上新建一个分支add_git_commandsfeature/
 	- 从github上把feature/add_git_commands分支上的代码克隆到本地当前位置，并放当前未知的GitLearning_02中，并且把本地git切换到add_git_commands分支：
 	 $ git clone -b feature/add_git_commands https://github.com/lengningLN/GitLearning.git GitLearning_02
+	- 如果本地没有发现在本地创建的远端分支，在本地执行git fetch [shortname],如果不知道shortname，可以执行 git remote -v 来查看详细的远程分支。
 
 
 
