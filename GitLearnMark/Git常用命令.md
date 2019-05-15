@@ -82,6 +82,9 @@
 	 $ git clone -b feature/add_git_commands https://github.com/lengningLN/GitLearning.git GitLearning_02
 	- 如果本地没有发现在本地创建的远端分支，在本地执行git fetch [shortname],如果不知道shortname，可以执行 git remote -v 来查看详细的远程分支。
 
+## 查看某个文件的某几行代码是谁修改的
+	- git blame -L 1,5 filename 
+
 
 
 
