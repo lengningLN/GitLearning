@@ -87,4 +87,25 @@
 
 
 
+## 让master分支强制会退到某个commit
+	- 用来测试的，团队开发不能这么做
+	- 客户端往远端做强制的回退操作：
+	- 在本地让远端master回退
+	- $ git push -f origin b3f033:master
+	- 在本地让远端的branch_01回退
+	- $ git push -f origin b3f033:branch_01
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
