@@ -15,3 +15,6 @@
 	- config : git仓库的配置文件，local用户信息存在在此
 	- refs : 引用，里面存放tags （用户设置的里程碑）和 heads（分支信息）
 	- objects : 存放所有的git对象
+
+
+## HEAD 、master、origin的区别

@@ -95,9 +95,72 @@
 	- 在本地让远端的branch_01回退
 	- $ git push -f origin b3f033:branch_01
 
+ 
+## 分支操作
+### 本地分支操作
+	- 新建本地分支：$ git branch newBranchName
+	- 切换本地分支: $ git checkout  newBranchName
+	- 新建并切换本地分支：$ git checkout -b newBranchName
+	- 将本地分支推送到远程：$ git push origin serverfix:awesomebranch ；  来将本地的 serverfix 分支推送到远程仓库上的 awesomebranch 分支。
+	- 合并分支: 先切换到要合并的最终分支，$ git merge otherBranchName
+	- 删除本地分支：$ git branch -d 分支名
+
+### 远程分支操作
+
+	- 新建并切换远程分支：git checkout -b dev origin/dev
+	作用是checkout远程的dev分支，在本地起名为dev分支，并切换到本地的dev分支
+	- 删除远程分支：$ git push origin -d 分支名
+
+### 如何创建远程分支？
+	- 这本身就是一个有问题的问题。如果想在远程产生新分支的逻辑如下
+	1. 首先本地要有一个分支，如果没有可以创建一个，通过git checkout -b dev origin/remoteBranchName ， 这就根据远程分支origin/remoteBranchName（或者一个commit）拉取代码在本地，并在本地创建dev分支，本地并且切换到dev分支上。
+
+	2. 执行git push origin dev:newRemoteBranchName:这样就把本地分支push到远程newRemoteBranchName分支上，如果远程没有newRemoteBranchName分支，则会创建一个。
 
 
 
+## tag的使用
+	1. 查看所有的本地标签tag：git tag
+	   查看所有的远程分支和标签：git ls-remote
+	   查看某个标签信息：git show 2.0.0
+	2. 给目前代码打标签（推荐使用附注标签）
+		2.1 附注标签：git tag -a 3.0.0 -m '3.0.0封版'
+		2.2 轻量标签：git tag 3.0.0
+	3. 后期给之前的提交打标签
+		git tag -a 2.0.1  [某次提交的校验和]
+
+	4. 将本地标签推到远程
+		- 这个过程就像工程远程分支一样
+		- git push origin 3.0.0
+
+		如果想要本地的标签一次性推送到到远程，如下会把所有不在远程仓库服务器上的标签全部传送到那里。
+		- git push origin --tags
+
+	5. 删除标签
+		git版本如果是1.7.0以前可以这样
+		- 删除本地标签：git tag -d 2.0.2
+		- 删除远程仓库中的标签：git push origin :refs/tags/2.0.2
+		git版本如果是1.7.0之后
+		- git push origin -d tag 2.0.2
+
+	6. 检出标签
+		- git checkout 2.0.0 
+		- 以上的做法会使你的仓库处在分离头指针的状态，如果处在这个状态，如果你做了某些修改然后提交他们，标签不会发生变化，你的新提交将不属于任何分支，并且无法访问，只能通过确切的提交哈希访问。
+
+		- 如果需要修复旧版本的bug，通常是在这个版本的位置创建一个新分支
+		- git checkout -b newBranch 2.0.0 
+
+
+## 忽略代码
+	1. 忽略暂存区某个文件的修改：git checkout -- filepathname
+	   忽略缓存区所有文件的修改：git checkout . 
+	2. 忽略缓存区（已经使用了git add ）
+		忽略某个文件：git reset HEAD filepathname
+		忽略所有文件：git reset HEAD .
+	  注意：执行完这个操作后，本地的修改并不会消失，而是回到了1所在的状态，可以继续执行1的逻辑
+	3. 已经git commit 提交代码了，还要忽略修改，输入回退
+		回退到上一次commit的状态：git reset --hard HEAD^
+		回退到任意版本：git reset --hard commitID
 
 
 
