@@ -22,7 +22,8 @@
 		$ cd 某个文件夹
 		$ git init yout_project_name #会在当前路径下创建和项目名称同名的文件夹
 		$ cd your_project
-
+	3. 从远程clone到本地
+		$ git clone git地址
 
 ## 基本操作
 	- git status ： 查看工作区、暂存区的状态，包括合并分支时或者合并代码时出现冲突，显示冲突文件
@@ -39,6 +40,7 @@
 	- git log --oneline : 查看单行的简洁历史
 	- git log --oneline -n3 : 查看最近三条简洁历史
 	- git log --oneline - all -n3 --graph : 查看所有分支最近4条单行的图形化历史
+
 
 ## 查看对象
 	- git cat-file 对象的哈希值 ：显示版本库对象的内容、类型以及大小信息
@@ -95,28 +97,103 @@
 	- 在本地让远端的branch_01回退
 	- $ git push -f origin b3f033:branch_01
 
- 
+ --------------------------------------------------------------------
 ## 分支操作
-### 本地分支操作
-	- 新建本地分支：$ git branch newBranchName
-	- 切换本地分支: $ git checkout  newBranchName
-	- 新建并切换本地分支：$ git checkout -b newBranchName
-	- 将本地分支推送到远程：$ git push origin serverfix:awesomebranch ；  来将本地的 serverfix 分支推送到远程仓库上的 awesomebranch 分支。
-	- 合并分支: 先切换到要合并的最终分支，$ git merge otherBranchName
-	- 删除本地分支：$ git branch -d 分支名
+### 远程仓库
+1. git remote : 查看已经配置的远程仓库服务器
+```
+$ git remote
+origin
+```
 
-### 远程分支操作
+2. git remote -v :显示远程仓库的简称和对应的URL
+```
+$ git remote -v
+origin	https://github.com/lengningLN/GitLearning.git (fetch)
+origin	https://github.com/lengningLN/GitLearning.git (push)
+```
 
-	- 新建并切换远程分支：git checkout -b dev origin/dev
-	作用是checkout远程的dev分支，在本地起名为dev分支，并切换到本地的dev分支
-	- 删除远程分支：$ git push origin -d 分支名
+3. git remote show remote-name:查看某一个远程仓库的更多信息
+```
+$ git remote show origin
+* remote origin
+  Fetch URL: https://github.com/lengningLN/GitLearning.git
+  Push  URL: https://github.com/lengningLN/GitLearning.git
+  HEAD branch: master
+  Remote branches:
+    dev                      tracked
+    feature/add_git_commands tracked
+    master                   tracked
+  Local branches configured for 'git pull':
+    dev                      merges with remote dev
+    feature/add_git_commands merges with remote feature/add_git_commands
+    master                   merges with remote master
+  Local refs configured for 'git push':
+    dev                      pushes to dev                      (fast-forwardable)
+    feature/add_git_commands pushes to feature/add_git_commands (up to date)
+    master                   pushes to master                   (up to date)
+```
 
-### 如何创建远程分支？
-	- 这本身就是一个有问题的问题。如果想在远程产生新分支的逻辑如下
-	1. 首先本地要有一个分支，如果没有可以创建一个，通过git checkout -b dev origin/remoteBranchName ， 这就根据远程分支origin/remoteBranchName（或者一个commit）拉取代码在本地，并在本地创建dev分支，本地并且切换到dev分支上。
+### 查看分支
+1.查看本地分支：$ git branch 
+2.查看远程分支：$ git branch -r
+3.查看所有分支：$ git branch -a 
+4.查看跟踪分支：$ git branch -vv 
+5.修改当前分支的远程跟踪分支：$ git branch -u origin/remoteBranch 
 
-	2. 执行git push origin dev:newRemoteBranchName:这样就把本地分支push到远程newRemoteBranchName分支上，如果远程没有newRemoteBranchName分支，则会创建一个。
 
+### 创建分支
+	- 通过本地分支创建新的本地分支，这样创建出的本地新分支都是没有与之对应的远程跟踪分支的。
+	1. 从当前分支创建分支：$ git branch newBranch ; 
+	2. 从当前分支创建一个新分支，并切换到刚创建的新分支：
+	$ git checkout -b newBranchName
+
+	- 通过远程分支创建本地分支，
+	1. git checkout -b release origin/dev ；
+	这表示在本地创建一个从远端dev分支拉取的新分支release，并在本地切换到release分支。
+	
+
+	- 远程分支
+	1. 可以通过本地分支创建远程分支，首先在本地要有一个分支(比如：dev)，然后把本地分支推送到远程，并起一个远程的名字。
+	- $ git push origin dev:remoteDev ；这样就把本地的dev分支推送到远程remoteDev分支，如果远程没有remoteDev会创建一个。但是这样创建的远程分支和本地分支之间并没有跟踪关系，如果希望dev和remoteDev之间有跟踪关系，可以使用-u参数，如下
+	- $ git push -u origin dev:removeDev ; 如果希望远程分支名和本地分支名相同，可以省略远程分支名，如下：
+	- $ git push -u origin dev ;如果当前分支就是dev，也可以省略当前分支名，如下
+	- $ git push -u origin ; 如果远程就一个分支，也可省略origin，如下
+	- $ git push -u
+
+
+
+
+### 切换分支
+	1. 切换本地分支：$ git checkout newBranch 
+	2. 切换远程分支：
+
+### 拉取
+	- git fetch 命令从服务器上专区本地没有的数据是，它并不会修改工作目录中的内容。它只会获取数据然后让你自己合并。
+	- git pull 命令它的含义是一个git fetch 紧接着一个git merge 命令。此命令会查找当前分支所跟踪的服务器分支，从服务器上抓取数据然后尝试合并到本地分支。
+
+### 合并分支
+	1. 将本地的其他分支合并到当前分支
+		-  $ git merge otherBranch
+	2. 远程分支一般不直接合并，一般通过在本地分支合并之后，在提交到远程的方式，实现远程两个分支之间的合并，因为git直接操作的是本地分支。
+
+### 推送push
+	- 向远程推送本地分支：git push remote-name branch-name
+	remote-name: 是远程仓库名，默认是origin，
+	branch-name: 是需要推送到远端的本地分支名。
+	如果远端只有一个仓库，且就要推送当前分支，可以直接写： git push 
+	这没有指定远端分支，如果branch-name分支有与之对应的远程跟踪分支，则会推送到对应的跟踪分支。
+
+	如果没有与之对应的远程跟踪分支，则默认会创建一个和branch-name同名的远端分支,但是这两个分支之间没有跟踪关系。如果需要指定一个特殊远端分支名称，可以这样：git push remote-name branch-name:remote-branch-name。
+	如果希望本地和远程分支具有跟踪关系，可以使用-u参数，如此：git push -u remote-name branch-name
+
+###  删除分支
+	1. 本地分支的删除：git branch -d branchName
+	2. 删除远程分支： git push -d origin remoteBranchName
+	3. 删除远程分支： git push origin :remoteBranchName ; 把本地一个空分支推送到远端的remoteBranchName分支，就相当于删除这个远端的分支
+
+
+----------------------------------------------------------------------
 
 
 ## tag的使用
